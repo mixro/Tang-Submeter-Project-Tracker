@@ -1,12 +1,12 @@
 import { useState, type FormEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { LockOutlinedIcon } from '../components/icons';
-import { Logo } from '../components/Logo';
+import { LockOutlinedIcon, VisibilityIcon, VisibilityOffIcon } from '../components/icons';
 import { useAuth } from '../context/AuthContext';
 import { ThemeToggle } from '../components/ThemeToggle';
 
 export function Login() {
   const [passcode, setPasscode] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const { login } = useAuth();
@@ -38,7 +38,11 @@ export function Login() {
 
       <div className="login-card">
         <div className="login-logo-wrap">
-          <Logo size={88} className="login-logo" />
+          <img
+            src="/tangtech-logo.png"
+            alt="Tang Tech & Engineering Ltd"
+            className="login-logo-img"
+          />
         </div>
 
         <h1 className="login-title">Digitalized Electrical Meter System</h1>
@@ -53,7 +57,7 @@ export function Login() {
               <LockOutlinedIcon size={20} className="input-icon" />
               <input
                 id="passcode"
-                type="password"
+                type={showPassword ? 'text' : 'password'}
                 value={passcode}
                 onChange={(e) => {
                   setPasscode(e.target.value);
@@ -64,6 +68,19 @@ export function Login() {
                 autoFocus
                 required
               />
+              <button
+                type="button"
+                className="password-toggle"
+                onClick={() => setShowPassword((prev) => !prev)}
+                aria-label={showPassword ? 'Hide passcode' : 'Show passcode'}
+                tabIndex={-1}
+              >
+                {showPassword ? (
+                  <VisibilityOffIcon size={20} />
+                ) : (
+                  <VisibilityIcon size={20} />
+                )}
+              </button>
             </div>
           </div>
 
@@ -88,7 +105,7 @@ export function Login() {
       </div>
 
       <p className="login-footer">
-        © 2026 Tang Tech &amp; Engineering Ltd
+        © 2026 Tang Tech &amp; Engineering Ltd · Internal use only
       </p>
     </div>
   );

@@ -9,8 +9,6 @@ export function Home() {
       <section className="hero">
         <h1 className="hero-title">Digitalized Electrical Meter System</h1>
 
-
-
         <div className="hero-meta-row">
           <span>
             <strong>Developed by</strong> Joseph Chongola
